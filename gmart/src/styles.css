@@ -1,0 +1,14 @@
+body {
+  background-color: #f4ecd8; /* Antique paper hex color */
+  color: #3e3124; /* Faded dark brown text */
+  font-family: 'Courier New', Courier, monospace; /* Typewriter feel */
+  margin: 0;
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  font-family: 'Georgia', serif;
+  border-bottom: 2px solid #3e3124;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}

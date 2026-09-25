@@ -1,0 +1,22 @@
+<div *ngIf="product" class="product-detail-container">
+  <a routerLink="/products" class="back-link">← Back to Catalog</a>
+
+  <div class="detail-card">
+    <img [src]="product.imageUrl" [alt]="product.name" class="detail-img">
+
+    <div class="detail-info">
+      <h2>{{ product.name }}</h2>
+      
+      <p class="price-tag">
+        <strong>${{ product.price }}</strong> per {{ product.uom }}
+      </p>
+
+      <div class="description-section">
+        <h3>Description</h3>
+        <p>{{ product.description || 'No description provided.' }}</p>
+      </div>
+
+      <button class="btn-add-cart">Add to Cart</button>
+    </div>
+  </div>
+</div>

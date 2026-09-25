@@ -1,0 +1,11 @@
+#titlebar{
+    background-color:Tomato;
+    color: azure;
+}
+
+#foobar {
+    background-image: url('../../assets/Group1.png');
+    width: 1200;
+    height: 400;
+    color:aliceblue;
+}

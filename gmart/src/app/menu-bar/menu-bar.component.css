@@ -1,0 +1,23 @@
+#div1 {
+  border-radius: 10px;
+  background-color: #ad2173;
+  color: white;
+  padding: 20px;
+  width: 80px;
+  height: 5px;
+}
+
+#menubar {
+  background-color: #97c329;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+#home_page{
+  border-radius: 10px;
+  background-color: #73AD21;
+  padding:5px;
+  width: 50px;
+  height: 15px;
+}

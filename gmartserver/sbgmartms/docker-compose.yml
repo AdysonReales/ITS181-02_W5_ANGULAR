@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  empldbsrvr:
+    image: mysql:8.0
+    container_name: mysql1
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: empldb
+      MYSQL_USER: mysqluser
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - emplnetwork
+
+  springboot-app:
+    image: emplms
+    container_name: sbemplsrvr
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://empldbsrvr:3306/empldb
+      SPRING_DATASOURCE_USERNAME: mysqluser
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "8080:8080"
+    depends_on:
+      - empldbsrvr
+    networks:
+      - emplnetwork
+
+networks:
+  emplnetwork:
+    driver: bridge

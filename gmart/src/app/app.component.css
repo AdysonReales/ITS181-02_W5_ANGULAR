@@ -1,0 +1,12 @@
+.vintage-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-area {
+  flex: 1; /* Pushes the footer to the bottom */
+  padding: 2rem 0;
+}

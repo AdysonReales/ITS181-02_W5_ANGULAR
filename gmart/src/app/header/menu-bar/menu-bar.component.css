@@ -1,0 +1,48 @@
+.vintage-nav {
+  border-top: 2px solid #3e3124;
+  border-bottom: 2px solid #3e3124;
+  background-color: #e8dbc3;
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+}
+
+.menu-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.menu-list a {
+  text-decoration: none;
+  color: #3e3124;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-list a:hover,
+.menu-list a.active {
+  background-color: #3e3124;
+  color: #f4ecd8;
+  border-color: #3e3124;
+}
+
+.auth-group {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.divider {
+  color: #3e3124;
+  font-weight: bold;
+}
