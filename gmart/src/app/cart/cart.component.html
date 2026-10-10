@@ -1,1 +1,141 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <h2>My Bids & Auction Cart</h2>
+  <p class="cart-sub">Track your live bidding auctions, countdown timers, and checkout won lots.</p>
+
+  <div *ngIf="toastMessage" class="vintage-toast">
+    {{ toastMessage }}
+  </div>
+
+  <div class="cart-layout">
+    <!-- Left Column: Active Bids & Won Auctions -->
+    <div class="bids-section">
+      <!-- Active Bids -->
+      <div class="vintage-panel">
+        <h3>Active Bidding ({{ activeBids.length }})</h3>
+
+        <div *ngIf="activeBids.length === 0" class="empty-msg">
+          <p>You have no active bids at the moment.</p>
+          <a routerLink="/products" class="btn-vintage">Browse Live Auctions</a>
+        </div>
+
+        <div class="bids-table-wrap" *ngIf="activeBids.length > 0">
+          <table class="vintage-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Your Bid</th>
+                <th>High Bid</th>
+                <th>Status</th>
+                <th>Time Left</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let b of activeBids">
+                <td>
+                  <div class="table-item-cell">
+                    <img [src]="b.product?.imageUrl || '/assets/photo-1.avif'" [alt]="b.product?.name" class="table-thumb" />
+                    <div>
+                      <strong>{{ b.product?.name }}</strong>
+                      <span class="lot-id">Lot #{{ b.product?.id }}</span>
+                    </div>
+                  </div>
+                </td>
+                <td>${{ b.userBid }}</td>
+                <td><strong>${{ (b.product?.currentBid || b.userBid) }}</strong></td>
+                <td>
+                  <span *ngIf="b.status === 'leading'" class="badge-vintage-active">
+                    Winning
+                  </span>
+                  <span *ngIf="b.status === 'outbid'" class="badge-vintage-sold">
+                    Outbid
+                  </span>
+                </td>
+                <td class="timer-cell">
+                  {{ getTimeRemainingFormatted(b.product?.auctionEndTime) }}
+                </td>
+                <td>
+                  <button (click)="raiseBid(b)" class="btn-vintage btn-small">+ Raise</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Won Auctions -->
+      <div class="vintage-panel mt-3">
+        <h3>Won Auctions ({{ wonItems.length }})</h3>
+
+        <div *ngIf="wonItems.length === 0" class="empty-msg">
+          <p>No won auctions awaiting checkout yet.</p>
+        </div>
+
+        <div class="won-table-wrap" *ngIf="wonItems.length > 0">
+          <table class="vintage-table">
+            <thead>
+              <tr>
+                <th>Won Item</th>
+                <th>Winning Price</th>
+                <th>Seller</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of wonItems">
+                <td>
+                  <div class="table-item-cell">
+                    <img [src]="item.imageUrl || '/assets/photo-1.avif'" [alt]="item.name" class="table-thumb" />
+                    <strong>{{ item.name }}</strong>
+                  </div>
+                </td>
+                <td><strong>${{ (item.currentBid || item.price) }}</strong></td>
+                <td>{{ item.sellerName || 'Verified Seller' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Order Checkout Summary -->
+    <div class="summary-section">
+      <div class="vintage-panel summary-box">
+        <h3>Order Summary</h3>
+        
+        <div class="summary-lines">
+          <div class="s-line">
+            <span>Hammer Subtotal:</span>
+            <span>${{ subtotal }}</span>
+          </div>
+          <div class="s-line">
+            <span>Buyer's Premium (10%):</span>
+            <span>${{ buyersPremium }}</span>
+          </div>
+          <div class="s-line">
+            <span>Insured Shipping:</span>
+            <span>${{ shippingCost }}</span>
+          </div>
+          <div class="s-line total-line">
+            <span>Total:</span>
+            <span>${{ totalAmount }}</span>
+          </div>
+        </div>
+
+        <div class="account-line" *ngIf="currentUser">
+          <small>Ordering as: <strong>{{ currentUser.fullName }}</strong></small>
+        </div>
+
+        <button 
+          (click)="onCheckout()" 
+          [disabled]="wonItems.length === 0 || isCheckingOut" 
+          class="btn-vintage btn-block">
+          {{ isCheckingOut ? 'Processing...' : 'Place Order & Checkout' }}
+        </button>
+
+        <p class="checkout-note" *ngIf="wonItems.length === 0">
+          * Win an auction or buy it now to proceed with checkout.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

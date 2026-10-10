@@ -1,0 +1,161 @@
+.cart-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.cart-sub {
+  font-style: italic;
+  color: #5c4a38;
+  margin-bottom: 1.5rem;
+}
+
+.vintage-toast {
+  background-color: #e8dbc3;
+  border: 1px solid #3e3124;
+  color: #3e3124;
+  padding: 8px 14px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1.8fr 1.2fr;
+  gap: 2rem;
+}
+
+@media (max-width: 850px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vintage-panel {
+  background-color: #ffffff;
+  border: 2px solid #3e3124;
+  border-radius: 4px;
+  padding: 1.5rem;
+  box-shadow: 2px 2px 0px rgba(62, 49, 36, 0.2);
+}
+
+.vintage-panel h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 2px solid #3e3124;
+  padding-bottom: 0.3rem;
+}
+
+.empty-msg {
+  text-align: center;
+  padding: 1.5rem;
+  color: #5c4a38;
+}
+
+.vintage-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.vintage-table th {
+  text-align: left;
+  border-bottom: 2px solid #3e3124;
+  padding: 8px;
+  font-family: 'Georgia', serif;
+  text-transform: uppercase;
+}
+
+.vintage-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #e8dbc3;
+  vertical-align: middle;
+}
+
+.table-item-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 1px solid #d4c8b5;
+  border-radius: 2px;
+}
+
+.lot-id {
+  display: block;
+  font-size: 0.75rem;
+  color: #8d7b68;
+}
+
+.timer-cell {
+  font-weight: bold;
+  color: #2e5a27;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 0.75rem;
+}
+
+.mt-3 {
+  margin-top: 1.5rem;
+}
+
+/* Summary Box */
+.summary-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.s-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #5c4a38;
+}
+
+.total-line {
+  margin-top: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed #3e3124;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3e3124;
+}
+
+.account-line {
+  background-color: #fcf9f2;
+  border: 1px solid #e8dbc3;
+  padding: 8px;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  font-size: 0.82rem;
+}
+
+.btn-block {
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.btn-block:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkout-note {
+  font-size: 0.75rem;
+  color: #8d7b68;
+  margin-top: 0.8rem;
+  font-style: italic;
+  text-align: center;
+}

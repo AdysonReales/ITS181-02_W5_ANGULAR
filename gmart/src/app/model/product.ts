@@ -1,14 +1,8 @@
-/*export class Product {
-  id!: number;
-  title!: string;
-  imagePath!: string;
-  description!: string;
-  sellerId!: string;
-  currentBid!: number;
-  buyItNowPrice?: number;
-  auctionEndTime!: Date;
-  highestBidderId?: string;
-}*/
+export interface BidRecord {
+  bidder: string;
+  amount: number;
+  time: string;
+}
 
 export class Product {
   id!: number;
@@ -17,4 +11,18 @@ export class Product {
   imageUrl!: string;
   uom!: string;
   price!: number;
+
+  // Antique Auction extensions
+  currentBid?: number;
+  startingBid?: number;
+  buyItNowPrice?: number;
+  bidCount?: number;
+  highestBidder?: string;
+  isSold?: boolean;
+  auctionEndTime?: string; // ISO date string or formatted
+  category?: string;
+  condition?: string;
+  sellerName?: string;
+  sellerEmail?: string;
+  history?: BidRecord[];
 }

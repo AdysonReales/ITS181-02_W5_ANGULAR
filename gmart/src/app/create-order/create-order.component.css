@@ -1,0 +1,97 @@
+.consign-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.consign-sub {
+  font-style: italic;
+  color: #5c4a38;
+  margin-bottom: 1.5rem;
+}
+
+.auth-notice-card {
+  background-color: #fce8e6;
+  border: 1px dashed #a81d1d;
+  color: #a81d1d;
+  padding: 1.5rem;
+  border-radius: 4px;
+}
+
+.auth-btn-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.consign-form-card {
+  background-color: #ffffff;
+  border: 2px solid #3e3124;
+  border-radius: 4px;
+  padding: 2rem;
+  box-shadow: 2px 2px 0px rgba(62, 49, 36, 0.2);
+}
+
+.seller-info {
+  font-size: 0.9rem;
+  color: #5c4a38;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #d4c8b5;
+}
+
+.listing-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #3e3124;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.success-banner {
+  background-color: #e6f4ea;
+  border: 1px solid #1e8e3e;
+  color: #137333;
+  padding: 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.error-banner {
+  background-color: #fce8e6;
+  border: 1px solid #a81d1d;
+  color: #a81d1d;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}

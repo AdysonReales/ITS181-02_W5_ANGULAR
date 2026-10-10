@@ -11,4 +11,93 @@ h1, h2, h3 {
   border-bottom: 2px solid #3e3124;
   text-transform: uppercase;
   letter-spacing: 2px;
+  color: #3e3124;
+}
+
+a {
+  color: #3e3124;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Vintage Buttons */
+.btn-vintage {
+  display: inline-block;
+  background-color: #3e3124;
+  color: #f4ecd8;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  padding: 8px 16px;
+  border: 2px solid #3e3124;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-vintage:hover {
+  background-color: #5c4a38;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn-vintage.btn-outline {
+  background-color: transparent;
+  color: #3e3124;
+}
+
+.btn-vintage.btn-outline:hover {
+  background-color: #3e3124;
+  color: #f4ecd8;
+}
+
+/* Vintage Status Badges */
+.badge-vintage-active {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #e8dbc3;
+  color: #2e5a27;
+  border: 1px solid #2e5a27;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.badge-vintage-sold {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #fce8e6;
+  color: #a81d1d;
+  border: 1px dashed #a81d1d;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+/* Vintage Form Inputs */
+.vintage-input {
+  background-color: #fffef7;
+  border: 1px solid #8d7b68;
+  color: #3e3124;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.vintage-input:focus {
+  outline: none;
+  border-color: #3e3124;
+  box-shadow: 0 0 3px rgba(62, 49, 36, 0.5);
 }

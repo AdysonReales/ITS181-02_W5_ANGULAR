@@ -1,1 +1,86 @@
-<p>create-order works!</p>
+<div class="consign-container">
+  <h2>List an Antique</h2>
+  <p class="consign-sub">Consign your vintage collectible or antique for live auction bidding.</p>
+
+  <!-- If not signed in -->
+  <div *ngIf="!currentUser" class="auth-notice-card">
+    <p><strong>Notice:</strong> You must be signed in to list an item.</p>
+    <div class="auth-btn-row">
+      <button (click)="signInAsDemo()" class="btn-vintage">Sign In as Jane Doe (Demo)</button>
+      <a routerLink="/sign-in" class="btn-vintage btn-outline">Sign In / Register</a>
+    </div>
+  </div>
+
+  <!-- If signed in -->
+  <div *ngIf="currentUser" class="consign-form-card">
+    <div *ngIf="successMessage" class="success-banner">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error-banner">
+      {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onSubmitListing()" *ngIf="!successMessage" class="listing-form">
+      <p class="seller-info">Listing under account: <strong>{{ currentUser.fullName }}</strong> ({{ currentUser.email }})</p>
+
+      <div class="form-group">
+        <label>Item Name / Title *</label>
+        <input type="text" [(ngModel)]="antique.name" name="name" required class="vintage-input" placeholder="e.g. 19th Century French Mantel Clock" />
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Category</label>
+          <select [(ngModel)]="antique.category" name="category" class="vintage-input">
+            <option value="Clocks & Horology">Clocks & Horology</option>
+            <option value="Ceramics & Porcelain">Ceramics & Porcelain</option>
+            <option value="Vintage Furniture">Vintage Furniture</option>
+            <option value="Jewelry & Watches">Jewelry & Watches</option>
+            <option value="Rare Books & Folios">Rare Books & Folios</option>
+            <option value="Fine Relics">Fine Relics</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Unit of Measure (UOM)</label>
+          <input type="text" [(ngModel)]="antique.uom" name="uom" class="vintage-input" placeholder="piece, set, etc." />
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Starting Bid / Price ($) *</label>
+          <input type="number" [(ngModel)]="antique.startingBid" name="startingBid" required min="1" class="vintage-input" />
+        </div>
+
+        <div class="form-group">
+          <label>Auction Duration</label>
+          <select [(ngModel)]="antique.durationHours" name="durationHours" class="vintage-input">
+            <option [ngValue]="1">1 Hour</option>
+            <option [ngValue]="6">6 Hours</option>
+            <option [ngValue]="24">24 Hours</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Select Antique Photo</label>
+        <select [(ngModel)]="antique.imageUrl" name="imageUrl" class="vintage-input">
+          <option *ngFor="let p of presetImages" [value]="p.url">{{ p.label }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea [(ngModel)]="antique.description" name="description" rows="4" class="vintage-input" placeholder="Enter condition, origin, provenance..."></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="isSubmitting" class="btn-vintage">
+          {{ isSubmitting ? 'Posting...' : 'Post Antique Listing' }}
+        </button>
+        <a routerLink="/products" class="btn-vintage btn-outline">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

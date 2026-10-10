@@ -8,5 +8,5 @@
 
 .content-area {
   flex: 1; /* Pushes the footer to the bottom */
-  padding: 2rem 0;
+  padding: 1.5rem 0;
 }

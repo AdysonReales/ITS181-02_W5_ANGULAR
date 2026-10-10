@@ -1,1 +1,52 @@
-<p>sign-in works!</p>
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Sign In</h2>
+    <p class="auth-sub">Access your collector account to bid and consign antiques.</p>
+
+    <!-- Quick Demo Logins -->
+    <div class="demo-box">
+      <small><strong>Quick 1-Click Demo Login:</strong></small>
+      <div class="demo-buttons">
+        <button *ngFor="let demo of demoUsers" (click)="loginWithDemo(demo)" class="btn-vintage btn-outline btn-demo">
+          {{ demo.fullName }} ({{ demo.role }})
+        </button>
+      </div>
+    </div>
+
+    <!-- Alert messages -->
+    <div *ngIf="successMessage" class="alert-success">
+      ✓ {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert-error">
+      ⚠ {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="onSignIn()" class="auth-form">
+      <div class="form-group">
+        <label>Email or Username:</label>
+        <input type="text" [(ngModel)]="identifier" name="identifier" required class="vintage-input" placeholder="e.g. jane.doe@example.com" />
+      </div>
+
+      <div class="form-group">
+        <label>Password:</label>
+        <input type="password" [(ngModel)]="password" name="password" required class="vintage-input" placeholder="••••••••" />
+      </div>
+
+      <button type="submit" [disabled]="isLoading" class="btn-vintage btn-block">
+        {{ isLoading ? 'Signing In...' : 'Sign In' }}
+      </button>
+    </form>
+
+    <p class="switch-auth">
+      Don't have an account? <a routerLink="/sign-up">Register here</a>
+    </p>
+
+    <!-- Postman Testing info -->
+    <div class="postman-box">
+      <strong>Postman Testing Endpoint:</strong>
+      <code>POST http://localhost:8080/api/auth/login</code>
+      <small>Body (JSON):</small>
+      <pre>{{"{\n  \"email\": \"jane.doe@example.com\",\n  \"password\": \"password123\"\n}"}}</pre>
+    </div>
+  </div>
+</div>

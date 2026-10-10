@@ -1,8 +1,120 @@
-<div class="vintage-hero">
-  <p class="subtitle">Curated Antiques, Rare Collectibles & Live Bidding</p>
-  
-  <div class="hero-actions">
-    <a routerLink="/products" class="btn-vintage">Browse Auctions</a>
-    <a routerLink="/create-order" class="btn-vintage btn-outline">List an Antique</a>
+<div class="home-container">
+  <!-- Original Vintage Hero -->
+  <div class="vintage-hero">
+    <p class="subtitle">Curated Antiques, Rare Collectibles & Live Bidding</p>
+    
+    <div class="hero-actions">
+      <a routerLink="/products" class="btn-vintage">Browse Auctions</a>
+      <button (click)="openListAntique()" class="btn-vintage btn-outline">List an Antique</button>
+    </div>
+  </div>
+
+  <!-- Consign / List an Antique section right on Home -->
+  <div class="list-antique-section" *ngIf="showQuickListingModal">
+    <h3>List an Antique for Live Auction</h3>
+    
+    <div *ngIf="!customerService.currentUser()" class="auth-notice">
+      <p><strong>Notice:</strong> You must be signed in to list an item.</p>
+      <a routerLink="/sign-in" [queryParams]="{ redirect: 'list' }" class="btn-vintage">Sign In First</a>
+    </div>
+
+    <div *ngIf="customerService.currentUser()" class="listing-box">
+      <div *ngIf="listingSuccess" class="success-notice">
+        <p>✓ Antique successfully listed! Check the catalog under Browse Auctions.</p>
+      </div>
+
+      <form *ngIf="!listingSuccess" (ngSubmit)="submitListing()" class="vintage-form">
+        <p class="signed-as">Listing as: <strong>{{ customerService.currentUser()?.fullName }}</strong></p>
+
+        <div class="form-row">
+          <label>Item Name:</label>
+          <input type="text" [(ngModel)]="newAntique.name" name="name" required class="vintage-input" placeholder="e.g. Victorian Pocket Watch" />
+        </div>
+
+        <div class="form-row">
+          <label>Category:</label>
+          <select [(ngModel)]="newAntique.category" name="category" class="vintage-input">
+            <option value="Clocks & Horology">Clocks & Horology</option>
+            <option value="Ceramics & Porcelain">Ceramics & Porcelain</option>
+            <option value="Vintage Furniture">Vintage Furniture</option>
+            <option value="Jewelry & Watches">Jewelry & Watches</option>
+            <option value="Rare Books & Folios">Rare Books & Folios</option>
+            <option value="Fine Relics">Fine Relics</option>
+          </select>
+        </div>
+
+        <div class="form-row-group">
+          <div class="form-row">
+            <label>Starting Bid ($):</label>
+            <input type="number" [(ngModel)]="newAntique.startingBid" name="startingBid" required class="vintage-input" />
+          </div>
+
+          <div class="form-row">
+            <label>Duration:</label>
+            <select [(ngModel)]="newAntique.durationHours" name="durationHours" class="vintage-input">
+              <option [ngValue]="1">1 Hour</option>
+              <option [ngValue]="6">6 Hours</option>
+              <option [ngValue]="24">24 Hours</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label>Image:</label>
+          <select [(ngModel)]="newAntique.imageUrl" name="imageUrl" class="vintage-input">
+            <option *ngFor="let p of presetImages" [value]="p.url">{{ p.label }}</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label>Description:</label>
+          <textarea [(ngModel)]="newAntique.description" name="description" rows="3" class="vintage-input" placeholder="Enter condition, origin, or description..."></textarea>
+        </div>
+
+        <div class="form-btn-row">
+          <button type="submit" [disabled]="isSubmitting" class="btn-vintage">
+            {{ isSubmitting ? 'Submitting...' : 'Post Antique Listing' }}
+          </button>
+          <button type="button" (click)="closeListModal()" class="btn-vintage btn-outline">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Featured Live Lots Preview -->
+  <div class="featured-catalog" *ngIf="featuredProducts.length > 0">
+    <h3>Featured Live Auctions</h3>
+    <div class="products-grid">
+      <div class="product-card" *ngFor="let product of featuredProducts">
+        <img 
+          [src]="product.imageUrl || '/assets/photo-1.avif'" 
+          [alt]="product.name" 
+          class="product-image" 
+        />
+        
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <p class="description">{{ product.description }}</p>
+          
+          <p class="price">
+            <strong>${{ (product.currentBid || product.price) }}</strong> 
+            <span *ngIf="product.uom"> / {{ product.uom }}</span>
+          </p>
+
+          <p class="status-line">
+            <span *ngIf="product.isSold || isTimerExpired(product.auctionEndTime)" class="badge-vintage-sold">
+              [SOLD]
+            </span>
+            <span *ngIf="!product.isSold && !isTimerExpired(product.auctionEndTime)" class="badge-vintage-active">
+              Active: {{ getTimeRemainingFormatted(product.auctionEndTime) }}
+            </span>
+          </p>
+
+          <a [routerLink]="['/product-detail', product.id]" class="btn-view">
+            View Details
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

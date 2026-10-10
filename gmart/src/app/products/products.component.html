@@ -1,16 +1,28 @@
 <div class="products-container">
-  <h2>Our Catalog</h2>
+  <div class="catalog-top-bar">
+    <h2>Our Catalog</h2>
+    <div class="catalog-actions">
+      <button (click)="refreshCatalog()" class="btn-vintage btn-outline btn-small">↻ Sync Catalog</button>
+      <a routerLink="/create-order" class="btn-vintage btn-small">+ List Antique</a>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div *ngIf="toastMessage" class="vintage-toast">
+    {{ toastMessage }}
+  </div>
 
   <!-- Empty state message if no products exist in the database -->
-  <div *ngIf="products.length === 0" class="no-products">
+  <div *ngIf="filteredProducts().length === 0" class="no-products">
     <p>No products available at the moment.</p>
+    <button (click)="refreshCatalog()" class="btn-vintage btn-small">Reload Products</button>
   </div>
 
   <!-- Product grid -->
-  <div class="products-grid" *ngIf="products.length > 0">
-    <div class="product-card" *ngFor="let product of products">
+  <div class="products-grid" *ngIf="filteredProducts().length > 0">
+    <div class="product-card" *ngFor="let product of filteredProducts()" [class.card-sold]="product.isSold || isTimerExpired(product.auctionEndTime)">
       <img 
-        [src]="product.imageUrl || 'https://via.placeholder.com/150'" 
+        [src]="product.imageUrl || '/assets/photo-1.avif'" 
         [alt]="product.name" 
         class="product-image" 
       />
@@ -20,13 +32,31 @@
         <p class="description">{{ product.description }}</p>
         
         <p class="price">
-          <strong>${{ product.price }}</strong> 
+          <strong>Current Bid: ${{ (product.currentBid || product.price) }}</strong> 
           <span *ngIf="product.uom"> / {{ product.uom }}</span>
         </p>
 
-        <a [routerLink]="['/product-detail', product.id]" class="btn-view">
-          View Details
-        </a>
+        <!-- Sold or Active timer status -->
+        <p class="auction-status">
+          <span *ngIf="product.isSold || isTimerExpired(product.auctionEndTime)" class="badge-vintage-sold">
+            [SOLD]
+          </span>
+          <span *ngIf="!product.isSold && !isTimerExpired(product.auctionEndTime)" class="badge-vintage-active">
+            ⏱ {{ getTimeRemainingFormatted(product.auctionEndTime) }}
+          </span>
+        </p>
+
+        <div class="card-btn-row">
+          <a [routerLink]="['/product-detail', product.id]" class="btn-view">
+            View Details
+          </a>
+          <button 
+            *ngIf="!product.isSold && !isTimerExpired(product.auctionEndTime)" 
+            (click)="onQuickBid(product)" 
+            class="btn-vintage btn-outline btn-quick-bid">
+            Bid
+          </button>
+        </div>
       </div>
     </div>
   </div>

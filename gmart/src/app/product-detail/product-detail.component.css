@@ -1,27 +1,139 @@
-div.gallery {
+.product-detail-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.vintage-toast {
+  background-color: #e8dbc3;
+  border: 1px solid #3e3124;
+  color: #3e3124;
+  padding: 8px 14px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #3e3124;
+}
+
+.detail-card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  background-color: #ffffff;
+  border: 2px solid #3e3124;
+  border-radius: 4px;
+  padding: 2rem;
+  box-shadow: 3px 3px 0px rgba(62, 49, 36, 0.2);
+}
+
+@media (max-width: 768px) {
+  .detail-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-media {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-div.gallery-item {
-    border-radius: 12px;
-    margin: 5px;
-  border: 1px solid #ccc;
-  width: 180px;
-}
-
-div.gallery-item:hover {
-  border: 1px solid #777;
-}
-
-div.gallery-item img {
+.detail-img {
   width: 100%;
-  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  border: 1px solid #d4c8b5;
+  border-radius: 4px;
 }
 
-div.gallery-item div.desc {
-  padding: 15px;
-  text-align: center;
+.detail-info h2 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #3e3124;
+  padding-bottom: 0.4rem;
 }
 
+.price-tag {
+  font-size: 1.2rem;
+  color: #3e3124;
+  margin-bottom: 1rem;
+}
+
+.status-indicator-box {
+  margin-bottom: 1.2rem;
+}
+
+.bidding-box {
+  background-color: #fcf9f2;
+  border: 1px solid #d4c8b5;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.bidding-box label {
+  display: block;
+  font-weight: bold;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.bid-action-row {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.bid-input {
+  width: 120px;
+  font-weight: bold;
+}
+
+.description-section {
+  margin-bottom: 1.5rem;
+}
+
+.description-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #d4c8b5;
+  padding-bottom: 0.3rem;
+}
+
+.description-section p {
+  color: #5c4a38;
+  line-height: 1.6;
+}
+
+.history-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #d4c8b5;
+  padding-bottom: 0.3rem;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.time-tag {
+  color: #8d7b68;
+}
+
+.leading-tag {
+  color: #2e5a27;
+  font-weight: bold;
+}

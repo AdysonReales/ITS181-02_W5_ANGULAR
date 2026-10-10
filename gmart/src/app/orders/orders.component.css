@@ -1,0 +1,162 @@
+.orders-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.orders-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.orders-top h2 {
+  margin: 0;
+}
+
+.filter-box {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+}
+
+.filter-box label {
+  font-weight: bold;
+}
+
+.select-account {
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+
+.orders-sub {
+  font-size: 0.88rem;
+  color: #5c4a38;
+  margin: 0.8rem 0 1.5rem;
+}
+
+.empty-orders {
+  background-color: #fffef7;
+  border: 1px dashed #3e3124;
+  padding: 2rem;
+  text-align: center;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order-card {
+  background-color: #ffffff;
+  border: 2px solid #3e3124;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0px rgba(62, 49, 36, 0.2);
+  overflow: hidden;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e8dbc3;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #3e3124;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.order-date {
+  color: #5c4a38;
+  font-size: 0.82rem;
+  margin-left: 6px;
+}
+
+.status-badge {
+  background-color: #3e3124;
+  color: #f4ecd8;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+
+.order-owner {
+  font-size: 0.82rem;
+  color: #5c4a38;
+}
+
+.order-items {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #f0e6d6;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.item-img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border: 1px solid #d4c8b5;
+  border-radius: 2px;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-info strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #3e3124;
+}
+
+.qty {
+  font-size: 0.8rem;
+  color: #8d7b68;
+}
+
+.item-price {
+  font-weight: bold;
+  color: #3e3124;
+  font-size: 1rem;
+}
+
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fcf9f2;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid #e8dbc3;
+  font-size: 0.85rem;
+}
+
+.dest-info {
+  color: #5c4a38;
+}
+
+.total-info strong {
+  font-size: 1.05rem;
+  color: #3e3124;
+}

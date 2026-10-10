@@ -1,5 +1,68 @@
-<div >
-    <label class="fl-header">
-        Orders Page        
-    </label>
+<div class="orders-container">
+  <div class="orders-top">
+    <h2>Orders Page</h2>
+    
+    <!-- Account Filter Dropdown -->
+    <div class="filter-box">
+      <label>Filter by Account:</label>
+      <select 
+        [ngModel]="selectedAccountFilter" 
+        (ngModelChange)="onAccountFilterChange($event)" 
+        class="vintage-input select-account">
+        <option value="current">Current Signed-In Account ({{ currentUser?.fullName || 'Guest' }})</option>
+        <option value="all">All Orders</option>
+        <option *ngFor="let acc of availableAccounts" [value]="acc.email">
+          {{ acc.fullName }} ({{ acc.email }})
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <p class="orders-sub">
+    Viewing orders for: <strong>{{ selectedAccountFilter === 'current' ? (currentUser?.email || 'Current Account') : selectedAccountFilter }}</strong>
+  </p>
+
+  <!-- Empty state -->
+  <div *ngIf="displayedOrders.length === 0" class="empty-orders">
+    <p>No past orders found for this account.</p>
+    <a routerLink="/products" class="btn-vintage">Browse Products</a>
+  </div>
+
+  <!-- Orders list -->
+  <div class="orders-list" *ngIf="displayedOrders.length > 0">
+    <div class="order-card" *ngFor="let order of displayedOrders">
+      <div class="order-header">
+        <div>
+          <span class="order-id">Order: <strong>{{ order.orderNumber }}</strong></span>
+          <span class="order-date">({{ order.orderDate }})</span>
+        </div>
+        <div>
+          <span class="status-badge">{{ order.status }}</span>
+          <span class="order-owner">Account: {{ order.customerName }}</span>
+        </div>
+      </div>
+
+      <div class="order-items">
+        <div class="order-item" *ngFor="let item of order.items">
+          <img [src]="item.imageUrl || '/assets/photo-1.avif'" [alt]="item.productName" class="item-img" />
+          <div class="item-info">
+            <strong>{{ item.productName }}</strong>
+            <span class="qty">Qty: {{ item.quantity }}</span>
+          </div>
+          <div class="item-price">
+            ${{ item.price }}
+          </div>
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <div class="dest-info">
+          <small>Ship to: {{ order.shippingAddress }}</small>
+        </div>
+        <div class="total-info">
+          <strong>Total: ${{ order.totalAmount }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,14 +1,25 @@
 <nav class="vintage-nav">
   <ul class="menu-list">
-    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+    <li><a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">Home</a></li>
     <li><a routerLink="/products" routerLinkActive="active">Browse Auctions</a></li>
     <li><a routerLink="/create-order" routerLinkActive="active">List an Antique</a></li>
     <li><a routerLink="/cart" routerLinkActive="active">My Bids & Cart</a></li>
     <li><a routerLink="/orders" routerLinkActive="active">Order History</a></li>
+    
+    <!-- Auth Group -->
     <li class="auth-group">
-      <a routerLink="/sign-in" routerLinkActive="active">Sign In</a>
-      <span class="divider">/</span>
-      <a routerLink="/sign-up" routerLinkActive="active">Register</a>
+      <ng-container *ngIf="!currentUser">
+        <a routerLink="/sign-in" routerLinkActive="active">Sign In</a>
+        <span class="divider">/</span>
+        <a routerLink="/sign-up" routerLinkActive="active">Register</a>
+      </ng-container>
+
+      <ng-container *ngIf="currentUser">
+        <span class="user-greeting" (click)="quickSwitchUser()" title="Click to switch profile">
+          [{{ currentUser.fullName }}]
+        </span>
+        <button (click)="onLogout()" class="btn-logout-link" title="Sign Out">Sign Out</button>
+      </ng-container>
     </li>
   </ul>
 </nav>

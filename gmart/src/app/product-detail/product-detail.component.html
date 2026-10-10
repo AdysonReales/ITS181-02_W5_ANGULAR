@@ -1,22 +1,58 @@
 <div *ngIf="product" class="product-detail-container">
-  <a routerLink="/products" class="back-link">← Back to Catalog</a>
+  <div *ngIf="toastMessage" class="vintage-toast">
+    {{ toastMessage }}
+  </div>
+
+  <a routerLink="/products" class="back-link">&larr; Back to Catalog</a>
 
   <div class="detail-card">
-    <img [src]="product.imageUrl" [alt]="product.name" class="detail-img">
+    <div class="detail-media">
+      <img [src]="product.imageUrl || '/assets/photo-1.avif'" [alt]="product.name" class="detail-img">
+    </div>
 
     <div class="detail-info">
       <h2>{{ product.name }}</h2>
       
       <p class="price-tag">
-        <strong>${{ product.price }}</strong> per {{ product.uom }}
+        <strong>Current Bid: ${{ (product.currentBid || product.price) }}</strong> 
+        <span *ngIf="product.uom"> per {{ product.uom }}</span>
       </p>
+
+      <!-- Sold / Timer indicator -->
+      <div class="status-indicator-box">
+        <span *ngIf="product.isSold || isTimerExpired(product.auctionEndTime)" class="badge-vintage-sold">
+          [SOLD / AUCTION CLOSED]
+        </span>
+        <span *ngIf="!product.isSold && !isTimerExpired(product.auctionEndTime)" class="badge-vintage-active">
+          ⏱ Time Remaining: {{ getTimeRemainingFormatted(product.auctionEndTime) }}
+        </span>
+      </div>
+
+      <!-- Live Bidding controls if not sold -->
+      <div class="bidding-box" *ngIf="!product.isSold && !isTimerExpired(product.auctionEndTime)">
+        <label>Enter Your Bid (Min ${{ minNextBid }}):</label>
+        <div class="bid-action-row">
+          <input type="number" [(ngModel)]="customBidAmount" [min]="minNextBid" class="vintage-input bid-input" />
+          <button (click)="onPlaceBid()" class="btn-vintage">Place Bid</button>
+          <button (click)="onBuyItNow()" class="btn-vintage btn-outline">Buy It Now</button>
+        </div>
+      </div>
 
       <div class="description-section">
         <h3>Description</h3>
         <p>{{ product.description || 'No description provided.' }}</p>
       </div>
 
-      <button class="btn-add-cart">Add to Cart</button>
+      <!-- Bid History -->
+      <div class="history-section" *ngIf="product.history && product.history.length > 0">
+        <h3>Bid History</h3>
+        <ul class="history-list">
+          <li *ngFor="let rec of product.history; let i = index">
+            <strong>{{ rec.bidder }}</strong>: ${{ rec.amount }} <span class="time-tag">({{ rec.time }})</span>
+            <span *ngIf="i === 0" class="leading-tag"> - Highest Bidder</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
