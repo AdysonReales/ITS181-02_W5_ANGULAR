@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  # MySQL Database Service
+  gmart-db:
+    image: mysql:8.0
+    container_name: gmart-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: emplmdb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - gmart-net
+
+  # Spring Boot Backend Service
+  gmart-backend:
+    build:
+      context: ./gmartserver/sbgmartms
+      dockerfile: Dockerfile
+    container_name: gmart-backend
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://gmart-db:3306/emplmdb?allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "8080:8080"
+    depends_on:
+      - gmart-db
+    networks:
+      - gmart-net
+
+  # Angular Frontend Service
+  gmart-frontend:
+    build:
+      context: ./gmart
+      dockerfile: Dockerfile
+    container_name: gmart-frontend
+    restart: always
+    ports:
+      - "4200:80"
+    depends_on:
+      - gmart-backend
+    networks:
+      - gmart-net
+
+networks:
+  gmart-net:
+    driver: bridge
+
+volumes:
+  mysql-data:
